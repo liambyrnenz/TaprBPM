@@ -33,6 +33,14 @@ enum BPMDisplayMode {
                 .font(.custom(.ralewayRegular, size: 24))
         }
     }
+    
+    var roundedActiveBPM: Text? {
+        guard case .active(let bpm) = self else {
+            return nil
+        }
+        return Text("\(Int(bpm.rounded()))")
+            .font(.custom(.ralewayRegular, size: 24))
+    }
 }
 
 class BPMViewModel: ObservableObject {
@@ -48,6 +56,18 @@ class BPMViewModel: ObservableObject {
     var lastTapTime: TimeInterval = 0
     var reducedBPMs: Double = 0
     var taps: Int = 0
+    
+    var tapsLabel: Text? {
+        guard taps > 0 else {
+            return nil
+        }
+        var tapsText = "\(taps) tap"
+        if taps > 1 {
+            tapsText += "s"
+        }
+        return Text(tapsText)
+            .font(.custom(.ralewayRegular, size: 16))
+    }
     
     /// Notifies the view model that a tap was received that should be counted against the BPM calculation.
     func tapReceived() {

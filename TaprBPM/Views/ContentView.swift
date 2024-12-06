@@ -18,10 +18,3 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
-
-/*
- TODO
- - Feedback animation when user taps
- - On-screen counter for taps, rounded figure
- - Long-press fullscreen wipe animation
- */
