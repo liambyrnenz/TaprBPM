@@ -23,14 +23,14 @@ enum BPMDisplayMode {
                 .font(.custom(.ralewayRegular, size: 24))
         case .first:
             return Text("First beat")
-                .font(.custom(.ralewayRegular, size: 24))
+                .font(.custom(.ralewayRegular, size: 32))
         case .active(let bpm):
             let tokens = String(format: "%.1f", bpm).split(separator: ".").map { String($0) }
             return Text(tokens[0])
-                .font(.custom(.ralewayRegular, size: 48))
+                .font(.custom(.ralewayRegular, size: 56))
             +
             Text(".\(tokens[1])")
-                .font(.custom(.ralewayRegular, size: 24))
+                .font(.custom(.ralewayRegular, size: 32))
         }
     }
     
@@ -39,7 +39,7 @@ enum BPMDisplayMode {
             return nil
         }
         return Text("\(Int(bpm.rounded()))")
-            .font(.custom(.ralewayRegular, size: 24))
+            .font(.custom(.ralewayRegular, size: 32))
     }
 }
 
@@ -66,7 +66,7 @@ class BPMViewModel: ObservableObject {
             tapsText += "s"
         }
         return Text(tapsText)
-            .font(.custom(.ralewayRegular, size: 16))
+            .font(.custom(.ralewayRegular, size: 24))
     }
     
     /// Notifies the view model that a tap was received that should be counted against the BPM calculation.
