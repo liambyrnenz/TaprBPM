@@ -10,7 +10,6 @@ import SwiftUI
 /*
  TODO
  - Feedback animation when user taps
- - On-screen counter for taps, rounded figure
  - Long-press fullscreen wipe animation
  - Pulse for current BPM
  - Enter BPM
@@ -19,33 +18,79 @@ import SwiftUI
 
 struct BPMView: View {
     @ObservedObject var viewModel: BPMViewModel
-    @GestureState var tapState: Bool = false
     
     var body: some View {
         ZStack {
-            viewModel.backgroundColor
-                .transition(.opacity)
-            Circle()
-                .foregroundColor(.gray)
-                .opacity(0.2)
-                .scaleEffect(tapState ? 4.0 : 1.0, anchor: .center)
+            BackgroundView(
+                color: viewModel.backgroundColor
+            )
             VStack {
                 viewModel.bpmDisplay.asText
                 viewModel.bpmDisplay.roundedActiveBPM
-                Spacer().frame(height: 8)
+                Spacer()
+                    .frame(height: 8)
                 viewModel.tapsLabel
             }
+            .allowsHitTesting(false)
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .ignoresSafeArea()
-        .onTapGesture {
-            viewModel.tapReceived()
-        }
-//        .gesture(LongPressGesture(minimumDuration: 1.0).updating($tapState) { value, state, transaction in
-//            state = value
-//        })
+        .simultaneousGesture(
+            TapGesture()
+                .onEnded {
+                    viewModel.tapReceived()
+                }
+        )
         .onLongPressGesture(minimumDuration: 1) {
             viewModel.reset()
+        }
+    }
+    
+    struct BackgroundView: View {
+        enum AnimationPhase: CaseIterable {
+            case start, pulse, end
+            
+            var scale: Double {
+                switch self {
+                case .start, .pulse:
+                    1.0
+                case .end:
+                    3.0
+                }
+            }
+            
+            var opacity: Double {
+                switch self {
+                case .start, .end:
+                    0.0
+                case .pulse:
+                    0.2
+                }
+            }
+        }
+        
+        let color: Color
+        
+        @State var trigger = false
+        
+        var body: some View {
+            ZStack {
+                color
+                    .onTapGesture {
+                        trigger.toggle()
+                    }
+                Circle()
+                    .foregroundStyle(.black)
+                    .phaseAnimator(AnimationPhase.allCases, trigger: trigger) { content, phase in
+                        content
+                            .opacity(phase.opacity)
+                            .scaleEffect(phase.scale)
+                    } animation: { phase in
+                        switch phase {
+                        case .start, .pulse: nil
+                        case .end: .easeOut(duration: 0.4)
+                        }
+                    }
+            }
         }
     }
 }
