@@ -31,6 +31,7 @@ struct BPMView: View {
                     .frame(height: 8)
                 viewModel.tapsLabel
             }
+            .foregroundStyle(viewModel.backgroundColor.isLight() ? .black : .white)
             .allowsHitTesting(false)
         }
         .ignoresSafeArea()

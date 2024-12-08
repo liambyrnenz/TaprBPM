@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C67F4432D05E64300BD28AF /* Color+Luminance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C67F4422D05E63E00BD28AF /* Color+Luminance.swift */; };
 		0CE9914726CCC047002B61CB /* TaprBPMApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE9914626CCC047002B61CB /* TaprBPMApp.swift */; };
 		0CE9914926CCC047002B61CB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE9914826CCC047002B61CB /* ContentView.swift */; };
 		0CE9914B26CCC048002B61CB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0CE9914A26CCC048002B61CB /* Assets.xcassets */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0C67F4422D05E63E00BD28AF /* Color+Luminance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Luminance.swift"; sourceTree = "<group>"; };
 		0CE9914326CCC047002B61CB /* TaprBPM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TaprBPM.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0CE9914626CCC047002B61CB /* TaprBPMApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaprBPMApp.swift; sourceTree = "<group>"; };
 		0CE9914826CCC047002B61CB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 		0CE9915A26CCE8B8002B61CB /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				0C67F4422D05E63E00BD28AF /* Color+Luminance.swift */,
 				0CE9915B26CCE8CC002B61CB /* FloatingPoint+Range.swift */,
 			);
 			path = Extensions;
@@ -202,6 +205,7 @@
 				0CE9914926CCC047002B61CB /* ContentView.swift in Sources */,
 				0CE9915C26CCE8CC002B61CB /* FloatingPoint+Range.swift in Sources */,
 				0CE9915726CCC0B3002B61CB /* BPMView.swift in Sources */,
+				0C67F4432D05E64300BD28AF /* Color+Luminance.swift in Sources */,
 				0CE9914726CCC047002B61CB /* TaprBPMApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
