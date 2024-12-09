@@ -41,9 +41,11 @@ struct BPMView: View {
                     viewModel.tapReceived()
                 }
         )
-        .onLongPressGesture(minimumDuration: 1) {
-            viewModel.reset()
-        }
+        .simultaneousGesture(
+            LongPressGesture(minimumDuration: 1).onEnded { _ in
+                viewModel.reset()
+            }
+        )
     }
 
     struct BackgroundView: View {
@@ -54,15 +56,28 @@ struct BPMView: View {
 
         let color: Color
 
-        @State var trigger = false
+        @State var feedbackAnimationTrigger = false
+        @State var resetAnimationTrigger = false
+        @GestureState var isShowingResetAnimation = false
 
         var body: some View {
             ZStack {
                 color
                     .onTapGesture {
-                        trigger.toggle()
+                        feedbackAnimationTrigger.toggle()
                     }
+                    .gesture(
+                        LongPressGesture(minimumDuration: 0.5)
+                            .onEnded { _ in
+                                resetAnimationTrigger.toggle()
+                            }
+                            .updating($isShowingResetAnimation) { currentState, gestureState, _ in
+                                gestureState = currentState
+                            }
+                    )
                 feedbackAnimationView
+                resetAnimationView
+                    .opacity(isShowingResetAnimation ? 1 : 0)
             }
         }
 
@@ -71,7 +86,7 @@ struct BPMView: View {
                 .foregroundStyle(.gray)
                 .keyframeAnimator(
                     initialValue: AnimationValues(),
-                    trigger: trigger
+                    trigger: feedbackAnimationTrigger
                 ) { content, value in
                     content
                         .opacity(value.opacity)
@@ -84,6 +99,39 @@ struct BPMView: View {
                     KeyframeTrack(\.scale) {
                         LinearKeyframe(3.0, duration: 0.3)
                         LinearKeyframe(1.0, duration: 0.1)
+                    }
+                }
+        }
+
+        enum ResetAnimationPhase: CaseIterable {
+            case start, expand, end
+
+            var scale: Double {
+                switch self {
+                case .start:
+                    1.0
+                case .expand:
+                    4.0
+                case .end:
+                    1.0
+                }
+            }
+        }
+
+        private var resetAnimationView: some View {
+            Circle()
+                .foregroundStyle(.white)
+                .phaseAnimator(
+                    ResetAnimationPhase.allCases,
+                    trigger: resetAnimationTrigger
+                ) { content, phase in
+                    content
+                        .scaleEffect(phase.scale)
+                } animation: { phase in
+                    switch phase {
+                    case .start: nil
+                    case .expand: .linear(duration: 1)
+                    case .end: nil
                     }
                 }
         }
