@@ -10,7 +10,9 @@ import SwiftUI
 /*
  TODO
  - Long-press fullscreen wipe animation
- -- Keyframe: slow growing circle for 1s, then wipe?
+ -- Combine long press gestures
+ -- Prevent tap while resetting
+ -- Fade text out and in on reset
  - Pulse for current BPM
  - Enter BPM
  - Metronome sound/setting
@@ -41,28 +43,41 @@ struct BPMView: View {
                     viewModel.tapReceived()
                 }
         )
-        .onLongPressGesture(minimumDuration: 1) {
-            viewModel.reset()
-        }
+        .simultaneousGesture(
+            LongPressGesture(minimumDuration: 0.3).onEnded { _ in
+                Task {
+                    try await Task.sleep(for: .seconds(0.7))
+                    viewModel.reset()
+                }
+            }
+        )
     }
 
     struct BackgroundView: View {
         struct AnimationValues {
             var opacity = 0.0
-            var scale = 1.0
+            var scale = 0.2
         }
 
         let color: Color
 
-        @State var trigger = false
+        @State var feedbackAnimationTrigger = false
+        @State var resetAnimationTrigger = false
 
         var body: some View {
             ZStack {
                 color
                     .onTapGesture {
-                        trigger.toggle()
+                        feedbackAnimationTrigger.toggle()
                     }
+                    .simultaneousGesture(
+                        LongPressGesture(minimumDuration: 0.3)
+                            .onEnded { _ in
+                                resetAnimationTrigger.toggle()
+                            }
+                    )
                 feedbackAnimationView
+                resetAnimationView
             }
         }
 
@@ -71,7 +86,7 @@ struct BPMView: View {
                 .foregroundStyle(.gray)
                 .keyframeAnimator(
                     initialValue: AnimationValues(),
-                    trigger: trigger
+                    trigger: feedbackAnimationTrigger
                 ) { content, value in
                     content
                         .opacity(value.opacity)
@@ -79,10 +94,34 @@ struct BPMView: View {
                 } keyframes: { _ in
                     KeyframeTrack(\.opacity) {
                         LinearKeyframe(0.1, duration: 0.1)
-                        LinearKeyframe(0.0, duration: 0.3)
+                        LinearKeyframe(0.0, duration: 0.4)
                     }
                     KeyframeTrack(\.scale) {
-                        LinearKeyframe(3.0, duration: 0.3)
+                        LinearKeyframe(3.0, duration: 0.4)
+                        LinearKeyframe(1.0, duration: 0.1)
+                    }
+                }
+        }
+
+        private var resetAnimationView: some View {
+            Circle()
+                .foregroundStyle(.white)
+                .keyframeAnimator(
+                    initialValue: AnimationValues(),
+                    trigger: resetAnimationTrigger
+                ) { content, value in
+                    content
+                        .opacity(value.opacity)
+                        .scaleEffect(value.scale)
+                } keyframes: { _ in
+                    KeyframeTrack(\.opacity) {
+                        LinearKeyframe(0.5, duration: 0.1)
+                        LinearKeyframe(1.0, duration: 1.0)
+                        LinearKeyframe(0.0, duration: 0.1)
+                    }
+                    KeyframeTrack(\.scale) {
+                        LinearKeyframe(1.0, duration: 0.1)
+                        LinearKeyframe(4.0, duration: 1.0)
                         LinearKeyframe(1.0, duration: 0.1)
                     }
                 }
