@@ -10,7 +10,7 @@ import SwiftUI
 /*
  TODO
  - Long-press fullscreen wipe animation
-   - Keyframe: slow growing circle for 1s, then wipe?
+ -- Keyframe: slow growing circle for 1s, then wipe?
  - Pulse for current BPM
  - Enter BPM
  - Metronome sound/setting
@@ -18,7 +18,7 @@ import SwiftUI
 
 struct BPMView: View {
     @ObservedObject var viewModel: BPMViewModel
-    
+
     var body: some View {
         ZStack {
             BackgroundView(
@@ -45,43 +45,47 @@ struct BPMView: View {
             viewModel.reset()
         }
     }
-    
+
     struct BackgroundView: View {
         struct AnimationValues {
             var opacity = 0.0
             var scale = 1.0
         }
-        
+
         let color: Color
-        
+
         @State var trigger = false
-        
+
         var body: some View {
             ZStack {
                 color
                     .onTapGesture {
                         trigger.toggle()
                     }
-                Circle()
-                    .foregroundStyle(.gray)
-                    .keyframeAnimator(
-                        initialValue: AnimationValues(),
-                        trigger: trigger
-                    ) { content, value in
-                        content
-                            .opacity(value.opacity)
-                            .scaleEffect(value.scale)
-                        } keyframes: { _ in
-                            KeyframeTrack(\.opacity) {
-                                LinearKeyframe(0.1, duration: 0.1)
-                                LinearKeyframe(0.0, duration: 0.3)
-                            }
-                            KeyframeTrack(\.scale) {
-                                LinearKeyframe(3.0, duration: 0.3)
-                                LinearKeyframe(1.0, duration: 0.1)
-                            }
-                        }
+                feedbackAnimationView
             }
+        }
+
+        private var feedbackAnimationView: some View {
+            Circle()
+                .foregroundStyle(.gray)
+                .keyframeAnimator(
+                    initialValue: AnimationValues(),
+                    trigger: trigger
+                ) { content, value in
+                    content
+                        .opacity(value.opacity)
+                        .scaleEffect(value.scale)
+                } keyframes: { _ in
+                    KeyframeTrack(\.opacity) {
+                        LinearKeyframe(0.1, duration: 0.1)
+                        LinearKeyframe(0.0, duration: 0.3)
+                    }
+                    KeyframeTrack(\.scale) {
+                        LinearKeyframe(3.0, duration: 0.3)
+                        LinearKeyframe(1.0, duration: 0.1)
+                    }
+                }
         }
     }
 }
