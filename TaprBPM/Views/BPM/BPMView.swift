@@ -119,8 +119,6 @@ struct BPMView: View {
     }
 }
 
-struct BPMView_Previews: PreviewProvider {
-    static var previews: some View {
-        BPMView(viewModel: BPMViewModel())
-    }
+#Preview {
+    BPMView(viewModel: BPMViewModel())
 }
