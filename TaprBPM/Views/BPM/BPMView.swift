@@ -9,10 +9,6 @@ import SwiftUI
 
 /*
  TODO
- - Long-press fullscreen wipe animation
- -- Combine long press gestures
- -- Prevent tap while resetting
- -- Fade text out and in on reset
  - Pulse for current BPM
  - Enter BPM
  - Metronome sound/setting
@@ -29,15 +25,9 @@ struct BPMView: View {
             backgroundView(
                 color: viewModel.backgroundColor
             )
-            VStack {
-                viewModel.bpmDisplay.asText
-                viewModel.bpmDisplay.roundedActiveBPM
-                Spacer()
-                    .frame(height: 8)
-                viewModel.tapsLabel
-            }
-            .foregroundStyle(viewModel.backgroundColor.isLight() ? .black : .white)
-            .allowsHitTesting(false)
+            bpmDisplay
+                .foregroundStyle(viewModel.backgroundColor.isLight() ? .black : .white)
+                .allowsHitTesting(false)
         }
         .ignoresSafeArea()
         .gesture(
@@ -62,6 +52,26 @@ struct BPMView: View {
             color
             feedbackAnimationView
             resetAnimationView
+        }
+    }
+
+    private var bpmDisplay: some View {
+        VStack {
+            viewModel.bpmDisplay.asText
+            viewModel.bpmDisplay.roundedActiveBPM
+            Spacer()
+                .frame(height: 8)
+            viewModel.tapsLabel
+        }.keyframeAnimator(
+            initialValue: 1.0,
+            trigger: resetAnimationTrigger
+        ) { content, value in
+            content.opacity(value)
+        } keyframes: { _ in
+            KeyframeTrack {
+                LinearKeyframe(0.0, duration: 0.7)
+                LinearKeyframe(1.0, duration: 0.7)
+            }
         }
     }
 
