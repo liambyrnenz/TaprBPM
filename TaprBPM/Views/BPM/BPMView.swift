@@ -40,20 +40,20 @@ struct BPMView: View {
             .allowsHitTesting(false)
         }
         .ignoresSafeArea()
-        .simultaneousGesture(
-            TapGesture().onEnded {
-                feedbackAnimationTrigger.toggle()
-                viewModel.tapReceived()
-            }
-        )
-        .simultaneousGesture(
-            LongPressGesture(minimumDuration: 0.3).onEnded { _ in
-                resetAnimationTrigger.toggle()
-                Task {
-                    try await Task.sleep(for: .seconds(0.7))
-                    viewModel.reset()
+        .gesture(
+            ExclusiveGesture(
+                TapGesture().onEnded {
+                    feedbackAnimationTrigger.toggle()
+                    viewModel.tapReceived()
+                },
+                LongPressGesture(minimumDuration: 0.2).onEnded { _ in
+                    resetAnimationTrigger.toggle()
+                    Task {
+                        try await Task.sleep(for: .seconds(0.7))
+                        viewModel.reset()
+                    }
                 }
-            }
+            )
         )
     }
 
@@ -111,8 +111,7 @@ struct BPMView: View {
                     LinearKeyframe(0.0, duration: 0.1)
                 }
                 KeyframeTrack(\.scale) {
-                    LinearKeyframe(1.0, duration: 0.1)
-                    LinearKeyframe(4.0, duration: 1.0)
+                    LinearKeyframe(4.0, duration: 1.1)
                     LinearKeyframe(1.0, duration: 0.1)
                 }
             }
