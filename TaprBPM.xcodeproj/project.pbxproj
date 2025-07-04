@@ -6,34 +6,31 @@
 	objectVersion = 77;
 	objects = {
 
-/* Begin PBXBuildFile section */
-		0C67F4432D05E64300BD28AF /* Color+Luminance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C67F4422D05E63E00BD28AF /* Color+Luminance.swift */; };
-		0CE9914726CCC047002B61CB /* TaprBPMApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE9914626CCC047002B61CB /* TaprBPMApp.swift */; };
-		0CE9914926CCC047002B61CB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE9914826CCC047002B61CB /* ContentView.swift */; };
-		0CE9914B26CCC048002B61CB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0CE9914A26CCC048002B61CB /* Assets.xcassets */; };
-		0CE9914E26CCC048002B61CB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0CE9914D26CCC048002B61CB /* Preview Assets.xcassets */; };
-		0CE9915726CCC0B3002B61CB /* BPMView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE9915626CCC0B3002B61CB /* BPMView.swift */; };
-		0CE9915926CCC0BB002B61CB /* BPMViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE9915826CCC0BB002B61CB /* BPMViewModel.swift */; };
-		0CE9915C26CCE8CC002B61CB /* FloatingPoint+Range.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE9915B26CCE8CC002B61CB /* FloatingPoint+Range.swift */; };
-		0CE9916B26CE0BAE002B61CB /* Raleway-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0CE9916A26CE0B8F002B61CB /* Raleway-Regular.ttf */; };
-		0CE9916E26CE0DCA002B61CB /* UIFont+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE9916D26CE0DCA002B61CB /* UIFont+Custom.swift */; };
-/* End PBXBuildFile section */
-
 /* Begin PBXFileReference section */
-		0C67F4422D05E63E00BD28AF /* Color+Luminance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Luminance.swift"; sourceTree = "<group>"; };
 		0CE9914326CCC047002B61CB /* TaprBPM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TaprBPM.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		0CE9914626CCC047002B61CB /* TaprBPMApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaprBPMApp.swift; sourceTree = "<group>"; };
-		0CE9914826CCC047002B61CB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		0CE9914A26CCC048002B61CB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		0CE9914D26CCC048002B61CB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		0CE9915626CCC0B3002B61CB /* BPMView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BPMView.swift; sourceTree = "<group>"; };
-		0CE9915826CCC0BB002B61CB /* BPMViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BPMViewModel.swift; sourceTree = "<group>"; };
-		0CE9915B26CCE8CC002B61CB /* FloatingPoint+Range.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FloatingPoint+Range.swift"; sourceTree = "<group>"; };
-		0CE9916926CE0B2F002B61CB /* OFL.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = OFL.txt; sourceTree = "<group>"; };
-		0CE9916A26CE0B8F002B61CB /* Raleway-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-Regular.ttf"; sourceTree = "<group>"; };
-		0CE9916C26CE0CD9002B61CB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		0CE9916D26CE0DCA002B61CB /* UIFont+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Custom.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		0CA262512E184E9900882286 /* Exceptions for "TaprBPM" folder in "TaprBPM" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+				Resources/Fonts/OFL.txt,
+			);
+			target = 0CE9914226CCC047002B61CB /* TaprBPM */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		0CA262442E184E9900882286 /* TaprBPM */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				0CA262512E184E9900882286 /* Exceptions for "TaprBPM" folder in "TaprBPM" target */,
+			);
+			path = TaprBPM;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		0CE9914026CCC047002B61CB /* Frameworks */ = {
@@ -49,7 +46,7 @@
 		0CE9913A26CCC046002B61CB = {
 			isa = PBXGroup;
 			children = (
-				0CE9914526CCC047002B61CB /* TaprBPM */,
+				0CA262442E184E9900882286 /* TaprBPM */,
 				0CE9914426CCC047002B61CB /* Products */,
 			);
 			sourceTree = "<group>";
@@ -60,73 +57,6 @@
 				0CE9914326CCC047002B61CB /* TaprBPM.app */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		0CE9914526CCC047002B61CB /* TaprBPM */ = {
-			isa = PBXGroup;
-			children = (
-				0CE9915426CCC078002B61CB /* Views */,
-				0CE9915A26CCE8B8002B61CB /* Extensions */,
-				0CE9916726CE0AD4002B61CB /* Resources */,
-				0CE9914C26CCC048002B61CB /* Preview Content */,
-				0CE9914A26CCC048002B61CB /* Assets.xcassets */,
-				0CE9916C26CE0CD9002B61CB /* Info.plist */,
-				0CE9914626CCC047002B61CB /* TaprBPMApp.swift */,
-			);
-			path = TaprBPM;
-			sourceTree = "<group>";
-		};
-		0CE9914C26CCC048002B61CB /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				0CE9914D26CCC048002B61CB /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		0CE9915426CCC078002B61CB /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				0CE9915526CCC0A1002B61CB /* BPM */,
-				0CE9914826CCC047002B61CB /* ContentView.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		0CE9915526CCC0A1002B61CB /* BPM */ = {
-			isa = PBXGroup;
-			children = (
-				0CE9915826CCC0BB002B61CB /* BPMViewModel.swift */,
-				0CE9915626CCC0B3002B61CB /* BPMView.swift */,
-			);
-			path = BPM;
-			sourceTree = "<group>";
-		};
-		0CE9915A26CCE8B8002B61CB /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				0C67F4422D05E63E00BD28AF /* Color+Luminance.swift */,
-				0CE9915B26CCE8CC002B61CB /* FloatingPoint+Range.swift */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
-		0CE9916726CE0AD4002B61CB /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				0CE9916826CE0ADE002B61CB /* Fonts */,
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
-		0CE9916826CE0ADE002B61CB /* Fonts */ = {
-			isa = PBXGroup;
-			children = (
-				0CE9916D26CE0DCA002B61CB /* UIFont+Custom.swift */,
-				0CE9916926CE0B2F002B61CB /* OFL.txt */,
-				0CE9916A26CE0B8F002B61CB /* Raleway-Regular.ttf */,
-			);
-			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -143,6 +73,9 @@
 			buildRules = (
 			);
 			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				0CA262442E184E9900882286 /* TaprBPM */,
 			);
 			name = TaprBPM;
 			productName = TaprBPM;
@@ -187,9 +120,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0CE9914E26CCC048002B61CB /* Preview Assets.xcassets in Resources */,
-				0CE9916B26CE0BAE002B61CB /* Raleway-Regular.ttf in Resources */,
-				0CE9914B26CCC048002B61CB /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -200,13 +130,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0CE9915926CCC0BB002B61CB /* BPMViewModel.swift in Sources */,
-				0CE9916E26CE0DCA002B61CB /* UIFont+Custom.swift in Sources */,
-				0CE9914926CCC047002B61CB /* ContentView.swift in Sources */,
-				0CE9915C26CCE8CC002B61CB /* FloatingPoint+Range.swift in Sources */,
-				0CE9915726CCC0B3002B61CB /* BPMView.swift in Sources */,
-				0C67F4432D05E64300BD28AF /* Color+Luminance.swift in Sources */,
-				0CE9914726CCC047002B61CB /* TaprBPMApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
